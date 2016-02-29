@@ -34,6 +34,18 @@ class ViewController: UIViewController {
         stepper.minimumValue = 1
         stepper.maximumValue = 10
         
+        var defaultSeg = 0
+    
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        if defaults.objectForKey("defaultSeg") == nil {
+            defaults.setInteger(0, forKey: "defaultSeg")
+        } else {
+            defaultSeg = defaults.objectForKey("defaultSeg") as! Int
+        }
+        
+        tipControl.selectedSegmentIndex = defaultSeg
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -74,6 +86,9 @@ class ViewController: UIViewController {
         splittedLabel.text = String(format: "$%.2f", splitted)
     }
     
-
+    override func viewDidAppear(animated: Bool) {
+        tipControl.selectedSegmentIndex = NSUserDefaults.standardUserDefaults().objectForKey("defaultSeg") as! Int
+    }
+    
 }
 

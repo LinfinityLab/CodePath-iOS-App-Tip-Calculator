@@ -10,18 +10,34 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+    
+    @IBOutlet weak var defaultControl: UISegmentedControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+    
+    
+    @IBAction func defaultChanged(sender: AnyObject) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        let index = defaultControl.selectedSegmentIndex
+        
+        defaults.setInteger(index, forKey: "defaultSeg")
+
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    override func viewDidAppear(animated: Bool) {
+        defaultControl.selectedSegmentIndex = NSUserDefaults.standardUserDefaults().objectForKey("defaultSeg") as! Int
+    }
     /*
     // MARK: - Navigation
 
